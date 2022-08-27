@@ -1,7 +1,7 @@
 async function main() {
 
     //retrieve list of books
-    let bookRequest = await fetch("http://localhost:3001/listBooks");
+    let bookRequest = await fetch("https://shielded-gorge-41034.herokuapp.com/books");
     let books = await bookRequest.json();
 
     //create list of all books and create functionality for each
@@ -44,21 +44,21 @@ function createDivs(book) {
 
     //update book quantity
     saveButton.addEventListener("click", async function() {
-        await fetch("http://localhost:3001/updateBook", {
+        await fetch(`https://shielded-gorge-41034.herokuapp.com/books/${book._id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                id: book.id,
                 quantity: input.value
             })
         });
+        document.location.reload();
     });
 
     //delete button
     deleteButton.addEventListener("click", async function() {
-        await fetch(`http://localhost:3001/removeBook/${book.id}`, {
+        await fetch(`https://shielded-gorge-41034.herokuapp.com/books/${book._id}`, {
             method: "DELETE"
         });
         document.location.reload();
@@ -120,7 +120,7 @@ function createForm() {
         }
 
         //add book to database
-        await fetch("http://localhost:3001/addBook", {
+        await fetch(`https://shielded-gorge-41034.herokuapp.com/books`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

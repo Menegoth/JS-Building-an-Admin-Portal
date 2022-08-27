@@ -1,6 +1,6 @@
 async function main() {
 
-    let response = await fetch('http://localhost:3001/listBooks')
+    let response = await fetch('https://shielded-gorge-41034.herokuapp.com/books')
     let books = await response.json()
 
     books.forEach(renderBook)
